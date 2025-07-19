@@ -46,9 +46,30 @@ app.get('/health', (req, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Detect Railway or other cloud platforms
+const getApiUrl = () => {
+  if (process.env.RAILWAY_STATIC_URL) {
+    return `https://${process.env.RAILWAY_STATIC_URL}`;
+  }
+  if (process.env.RENDER_EXTERNAL_URL) {
+    return process.env.RENDER_EXTERNAL_URL;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return `http://localhost:${PORT}`;
+};
+
 app.listen(PORT, () => {
+  const apiUrl = getApiUrl();
+  
   console.log(`🚀 Serveur démarré sur le port ${PORT}`);
-  console.log(`📡 API disponible sur http://localhost:${PORT}`);
+  console.log(`📡 API disponible sur ${apiUrl}`);
+  console.log(`🔗 Endpoints: ${apiUrl}/api/scan, ${apiUrl}/api/links, ${apiUrl}/api/redirect`);
+  console.log(`❤️  Health check: ${apiUrl}/health`);
+  console.log(`🌍 Environment: ${NODE_ENV}`);
 });
 
 export default app;
