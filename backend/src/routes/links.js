@@ -2,11 +2,12 @@ import { Router } from 'express';
 import { validationResult } from 'express-validator';
 import SmartLink from '../models/SmartLink.js';
 import { createLinkValidation, slugValidation } from '../validators/linkValidators.js';
+import { normalizeSmartLinkData } from '../middleware/normalizeData.js';
 
 const router = Router();
 
 // Create a new SmartLink
-router.post('/links', createLinkValidation, async (req, res) => {
+router.post('/links', normalizeSmartLinkData, createLinkValidation, async (req, res) => {
   try {
     console.log('Request body:', JSON.stringify(req.body, null, 2));
     

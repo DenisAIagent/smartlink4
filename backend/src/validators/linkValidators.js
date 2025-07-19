@@ -23,7 +23,16 @@ export const createLinkValidation = [
     .withMessage('Le slug contient des caractères invalides. Utilisez uniquement des lettres minuscules, des chiffres et des tirets.'),
     
   body('coverUrl')
-    .isURL()
+    .optional({ nullable: true, checkFalsy: true })
+    .custom((value) => {
+      if (!value || value.trim() === '') return true;
+      try {
+        new URL(value);
+        return true;
+      } catch {
+        return false;
+      }
+    })
     .withMessage('URL de couverture invalide'),
     
   body('streamingLinks')
