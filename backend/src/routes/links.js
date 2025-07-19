@@ -31,13 +31,17 @@ router.post('/links', normalizeSmartLinkData, createLinkValidation, async (req, 
     }
 
     // Create the SmartLink
+    console.log('Creating SmartLink with data:', req.body);
     const link = await SmartLink.create(req.body);
+    console.log('SmartLink created successfully:', link);
     res.status(201).json(link);
     
   } catch (error) {
-    console.error('Create link error:', error.message);
+    console.error('Create link error:', error);
+    console.error('Stack trace:', error.stack);
     res.status(500).json({ 
-      error: 'Erreur interne du serveur' 
+      error: 'Erreur interne du serveur',
+      message: error.message 
     });
   }
 });
