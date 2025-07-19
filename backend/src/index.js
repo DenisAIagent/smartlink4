@@ -25,6 +25,8 @@ const corsOptions = {
     'https://smartlink4-frontend-staring.up.railway.app',
     /\.railway\.app$/
   ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   credentials: true,
   optionsSuccessStatus: 200
 };
