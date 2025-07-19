@@ -21,12 +21,14 @@ const SmartLinkSchema = new mongoose.Schema({
   },
   coverUrl: {
     type: String,
-    required: true
+    required: false,
+    default: 'https://via.placeholder.com/300x300/6366f1/ffffff?text=Cover'
   },
   streamingLinks: {
     type: Map,
     of: String,
-    required: true
+    required: false,
+    default: new Map()
   },
   analytics: {
     gtmId: String,
