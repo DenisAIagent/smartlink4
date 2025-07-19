@@ -50,8 +50,7 @@ const connectDB = async () => {
       bufferCommands: false,
       maxPoolSize: 10,
       serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 30000,
-      bufferMaxEntries: 0
+      socketTimeoutMS: 30000
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
