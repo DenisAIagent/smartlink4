@@ -37,9 +37,14 @@ app.use(express.json());
 // MongoDB connection
 const connectDB = async () => {
   try {
-    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || process.env.MONGO_URL || process.env.MONGO_PUBLIC_URL;
+    let mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || process.env.MONGO_URL || process.env.MONGO_PUBLIC_URL;
     if (!mongoUri) {
       throw new Error('MongoDB URI not found in environment variables');
+    }
+    
+    // Ajouter le nom de base de données si manquant
+    if (!mongoUri.includes('/smartlink') && !mongoUri.endsWith('/')) {
+      mongoUri += '/smartlink';
     }
     
     console.log('Using MongoDB URI:', mongoUri.replace(/\/\/.*@/, '//***:***@')); // masquer les credentials
