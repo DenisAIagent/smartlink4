@@ -25,10 +25,9 @@ const SmartLinkSchema = new mongoose.Schema({
     default: 'https://via.placeholder.com/300x300/6366f1/ffffff?text=Cover'
   },
   streamingLinks: {
-    type: Map,
-    of: String,
+    type: Object,
     required: false,
-    default: new Map()
+    default: () => ({})
   },
   analytics: {
     gtmId: String,
@@ -41,9 +40,8 @@ const SmartLinkSchema = new mongoose.Schema({
       default: 0
     },
     clicks: {
-      type: Map,
-      of: Number,
-      default: {}
+      type: Object,
+      default: () => ({})
     }
   },
   createdAt: {
