@@ -12,7 +12,8 @@
       "Bash(true)",
       "Bash(rm:*)",
       "Bash(git checkout:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(timeout 10 npm run dev)"
     ],
     "deny": []
   }
