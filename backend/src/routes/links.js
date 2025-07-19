@@ -8,8 +8,11 @@ const router = Router();
 // Create a new SmartLink
 router.post('/links', createLinkValidation, async (req, res) => {
   try {
+    console.log('Request body:', JSON.stringify(req.body, null, 2));
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', JSON.stringify(errors.array(), null, 2));
       return res.status(400).json({ 
         error: 'Données invalides',
         details: errors.array() 
